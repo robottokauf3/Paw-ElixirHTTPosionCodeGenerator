@@ -22,6 +22,7 @@
   "devDependencies": {
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
+    "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-preset-es2015": "^6.9.0",
     "eslint": "^3.2.0",
     "eslint-config-google": "^0.6.0",
@@ -31,5 +32,8 @@
     "jscs": "^3.0.7",
     "path": "^0.12.7",
     "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "mustache": "^2.2.1"
   }
 }
