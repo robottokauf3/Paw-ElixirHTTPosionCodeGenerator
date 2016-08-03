@@ -1,0 +1,31 @@
+defmodule ExportedRequest do
+  @moduledoc """
+  First, make sure you add HTTPoison to your mix.exs dependencies:
+
+  def deps do
+    [{:httpoison, "~> 0.9.0"}]
+  end
+  """
+
+  @doc """
+  # {{{ request.name }}}
+  # {{{ request.method }}} {{{ request.url }}}
+  """
+  def request() do
+    url = "{{{ request.url }}}"
+    headers = []
+    options = []
+
+    HTTPoison.start()
+    case HTTPoison.get(url, headers, options) do
+      {:ok, response = %HTTPoison.Response{status_code: status_code, body: body}} ->
+        IO.inspect(status_code)
+        IO.inspect(body)
+
+        response
+      {:error, error = %HTTPoison.Error{reason: reason}} ->
+        IO.inspect(reason)
+    end
+  end
+
+end
