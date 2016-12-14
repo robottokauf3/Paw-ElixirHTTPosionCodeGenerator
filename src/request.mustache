@@ -13,11 +13,18 @@ defmodule ExportedRequest do
   """
   def request() do
     url = "{{{ request.url }}}"
-    headers = []
-    options = []
+
+    # ====== Headers ======
+    headers = [{{^headers.hasHeaders}}]{{/headers.hasHeaders}}
+    {{#headers.hasHeaders}}
+    {{#headers.headers}}
+      {"{{{name}}}", "{{{value}}}"},
+    {{/headers.headers}}
+    ]
+    {{/headers.hasHeaders}}
 
     HTTPoison.start()
-    case HTTPoison.get(url, headers, options) do
+    case HTTPoison.get(url, headers) do
       {:ok, response = %HTTPoison.Response{status_code: status_code, body: body}} ->
         IO.inspect(status_code)
         IO.inspect(body)
@@ -25,6 +32,8 @@ defmodule ExportedRequest do
         response
       {:error, error = %HTTPoison.Error{reason: reason}} ->
         IO.inspect(reason)
+
+        error
     end
   end
 

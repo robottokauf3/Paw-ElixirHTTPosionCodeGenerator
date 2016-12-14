@@ -8,12 +8,28 @@ class ElixirHTTPoisonCodeGenerator {
   static title = 'Elixir (HTTPoison)';
   static fileExtension = 'ex';
 
+  headers(request) {
+    const headerNames = Object.keys(request.headers);
+
+    let headers = [];
+
+    for (let name of headerNames) {
+      headers.push({name: name, value: request.headers[name]});
+    }
+
+    return {
+      hasHeaders: headerNames.length > 0,
+      headers: headers
+    };
+  }
+
   generate(context) {
     const template = readFile('request.mustache');
     const request = context.getCurrentRequest();
 
     const view = {
-      request: request
+      request: request,
+      headers: this.headers(request)
     };
 
     return Mustache.render(template, view);
