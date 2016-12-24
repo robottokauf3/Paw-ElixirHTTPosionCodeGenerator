@@ -9,10 +9,10 @@ defmodule ExportedRequest do
 
   @doc """
   # {{{ request.name }}}
-  # {{{ request.method }}} {{{ request.url }}}
+  # {{{ request.method }}} {{{ url.fullPath }}}
   """
   def request() do
-    url = "{{{ request.url }}}"
+    url = "{{{ url.base }}}"
 
     # ====== Headers ======
     headers = [{{^headers.hasHeaders}}]{{/headers.hasHeaders}}
@@ -23,8 +23,17 @@ defmodule ExportedRequest do
     ]
     {{/headers.hasHeaders}}
 
+    # ====== Query Params ======
+    params = %{ {{^url.hasParams}} } {{/url.hasParams}}
+    {{#url.hasParams}}
+    {{#url.params}}
+      {"{{{name}}}", "{{{value}}}"},
+    {{/url.params}}
+    }
+    {{/url.hasParams}}
+
     HTTPoison.start()
-    case HTTPoison.get(url, headers) do
+    case HTTPoison.get(url, headers, params: params) do
       {:ok, response = %HTTPoison.Response{status_code: status_code, body: body}} ->
         IO.inspect(status_code)
         IO.inspect(body)
