@@ -8,6 +8,12 @@ class ElixirHTTPoisonCodeGenerator {
   static identifier = 'me.rok3.PawExtensions.ElixirHTTPoisonCodeGenerator';
   static title = 'Elixir (HTTPoison)';
   static fileExtension = 'ex';
+  static languageHighlighter = 'elixir';
+
+  escapeChars(body) {
+    return body.replace(/[\\"]/g, '\\$&')
+      .replace(/\r?\n|\r/g, '\\r\\n');
+  }
 
   url(request) {
     let rawUrl = new YouAreI(request.url);
@@ -42,14 +48,39 @@ class ElixirHTTPoisonCodeGenerator {
     };
   }
 
+  body(request) {
+    const methodsWithBody = ["PATCH", "POST", "PUT"];
+    const hasBody = methodsWithBody.indexOf(request.method) !== -1;
+
+    if (request.jsonBody) {
+      return {
+        hasBody: true,
+        content: this.escapeChars(`${JSON.stringify(request.jsonBody)}`)
+      };
+    }
+
+    if (request.body) {
+      return {
+        hasBody: true,
+        content: this.escapeChars(`${request.body}`)
+      };
+    }
+
+    return {
+      hasBody: hasBody
+    };
+  }
+
   generate(context) {
     const template = readFile('request.mustache');
     const request = context.getCurrentRequest();
 
     const view = {
       request: request,
+      method: request.method.toLowerCase(),
       url: this.url(request),
-      headers: this.headers(request)
+      headers: this.headers(request),
+      body: this.body(request)
     };
 
     return Mustache.render(template, view);
