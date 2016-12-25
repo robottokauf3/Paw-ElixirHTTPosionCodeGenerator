@@ -1,6 +1,6 @@
 {
   "name": "paw-elixir-httposion-code-generator",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A Paw Extension to generate client code for Elixir using the HTTPosion library.",
   "homepage": "https://github.com/robottokauf3/Paw-ElixirHTTPosionCodeGenerator#readme",
   "author": "Robert Kaufmann III <rok3@rok3.me> (http://rok3.me)",
