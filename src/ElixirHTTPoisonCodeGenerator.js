@@ -54,14 +54,14 @@ class ElixirHTTPoisonCodeGenerator {
 
     if (request.jsonBody) {
       return {
-        hasBody: true,
+        hasBody: hasBody,
         content: this.escapeChars(`${JSON.stringify(request.jsonBody)}`)
       };
     }
 
     if (request.body) {
       return {
-        hasBody: true,
+        hasBody: hasBody,
         content: this.escapeChars(`${request.body}`)
       };
     }
