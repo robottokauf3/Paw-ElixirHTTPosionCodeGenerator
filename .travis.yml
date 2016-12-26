@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - 6
+script:
+  - make lint
+before_deploy:
+  - make archive
+deploy:
+  provider: releases
+  api_key:
+    secure: IO6t6uGRLlJq1Wlxc8Q9ldrgRPlcUpYSeW09JW4wI1YUvxI2ZiqjPOXN5sESD2MbpK9SEbs2eotISM6hB1PwMMrrzD6KXrUP24nwRTa4qiz1NxTULttxdfGNABUA/tz8uqZ61AMxM3ztj58SlONZUmZWE8SUYEbX2GexNclLvZpl4KMwDBCg1ohp80G9F3eWaXeKiV26mh9D3rKRCLJEQDYuCoMVftRzuh/i8X4sQ3Bjzsq2LkQUSn7wZDZl4ksZT63Y4wKZQ6FvqRCqIaFtlyUkTSAu5tUWAz6V8phP4WTBolCe9hFkHRX2Eg1HQvHnSDyt9FWL2XWQJFT5SZQrt7UTqk+3wwjZXpX/hOGWqn+AHsmowdXDaN8wgu93519N30qy5HhBCGIs4CRtWOyl7Fd9yOdejRVdFDcQwG4+wewEheKUnJ8yG5+mHovFruEwBJ3QKxwcquFDHM46EUIJ418HTgrmMfSBd4jQPiX+3OnT7cePomYsjJa4Q6ablUhsw163ynqqW7brOCpSVu7KRY+9Ekm9svJ/VRpXhOpy2aJUyKPZ71w7XYMwVa3hm7QNhl72Oi/sPnf00EVlzv9qWvr1PnnCeZdVlnFQ2215gbh/6XZg19D8meb9jefMI9uJEWrt+A4U4J4BiSeLYH6CrMHT2J9YzkpTKTT0/rRa2JM=
+  file:
+    - build/ElixirHTTPoisonCodeGenerator.tar.gz
+    - build/ElixirHTTPoisonCodeGenerator.zip
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: robottokauf3/Paw-ElixirHTTPosionCodeGenerator
