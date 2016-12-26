@@ -50,7 +50,7 @@ make lint
 
 #### Archive
 
-Create a `.zip` archive of the extension:
+Create `.zip` and `.tar.gz` archives of the extension:
 
 ```shell
 make archive

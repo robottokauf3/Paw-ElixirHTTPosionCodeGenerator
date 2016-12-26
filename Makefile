@@ -17,5 +17,6 @@ install: clean build
 lint:
 	npm run lint
 
-archive: build
+archive: clean build
 	cd ./build; tar zcf ElixirHTTPoisonCodeGenerator.tar.gz "$(identifier)/"
+	cd ./build; zip -q -r ElixirHTTPoisonCodeGenerator.zip "$(identifier)/"
