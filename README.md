@@ -5,7 +5,7 @@ Elixir and HTTPosion Code Generator (Paw Extension)
 
 A [Paw Extension](https://paw.cloud/extensions/) to generate client code for Elixir using the [HTTPosion](https://github.com/edgurgel/httpoison) library.
 
-![](screenshot.jpg)
+![](screenshot.png)
 
 ## Installation
 
